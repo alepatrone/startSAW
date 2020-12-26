@@ -1,0 +1,34 @@
+.input-group{
+  display:inline-table;
+  vertical-align:middle
+}
+
+.mainFrame{
+   width: 200px;
+   max-width: 500px;
+   margin: auto;
+   margin-top: 20px;
+}
+
+.frame{
+  text-align: center;
+  border: 2 px blueviolet;
+  border-style: solid;
+  border-color: royalblue;
+  border-radius: 12px;
+  border-width: 8px;
+  background-color: royalblue;
+}
+
+input[type="submit"]{
+  border: none;
+  padding: 5px;
+  display:inline-block;
+  background-color: lightcoral;
+}
+
+
+
+
+
+
