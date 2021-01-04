@@ -7,11 +7,11 @@ if ($con->connect_errno) {
     exit();
 }
 
-/*if (!empty($_GET)) {
+if (!empty($_GET)) {
     $id = $_GET['id'];
-}*/
+}
 
-//if ($_SESSION["user"] === $id) {
+if ($_SESSION["user"] === $id) {
 
     $firstname = $_POST['firstname'];
     $firstname = $con->real_escape_string($firstname);
@@ -20,10 +20,14 @@ if ($con->connect_errno) {
     $email = $_POST['email'];
     $email = trim($email);
     $email = $con->real_escape_string($email);
-    //$bio = $_POST['bio'];
-   // $bio = $con->real_escape_string($bio);
-   // $citta = $_POST['citta'];
-   // $citta = $con->real_escape_string($citta);
+    if(isset($_POST['bio'])){
+        $bio = $_POST['bio'];
+    $bio = $con->real_escape_string($bio);
+    }
+    if(isset($_POST['citta'])){
+        $citta = $_POST['citta'];
+    $citta = $con->real_escape_string($citta);
+    }
 
     if (empty($_POST['firstname'])) {
         echo "errore inserimento nome\n";
@@ -41,18 +45,14 @@ if ($con->connect_errno) {
         }
     }
 
-  /*  $query = "UPDATE users SET firstname='" . $firstname . "',lastname='" . $lastname . "',email='" . $email . "'
-            ,bio='" . $bio . "',citta='" . $citta . "' WHERE id=$id";*/
-             $query = "UPDATE users SET firstname='" . $firstname . "',lastname='" . $lastname . "',email='" . $email . "'
-             , WHERE id=10";
+    $query = "UPDATE users SET firstname='" . $firstname . "', lastname='" . $lastname . "', email='" . $email . "'
+            , bio='" . $bio . "', citta='" . $citta . "' WHERE id=$id";
     $res = $con->query($query);
-    echo $query;
-    //$row = $res->fetch_assoc();
-    // $res->free();
     $con->close();
 
     header("Location: index.php");
 
-/*} else {
+} else {
     echo "Not logged as this user";
-}*/
+}
+?>

@@ -38,7 +38,6 @@ if($result->num_rows==0){
 
     $outputString .= 
     '<div class="form-group" id="review-form">
-    <label id="rating" for="rating">RATING</label>
     <span class="star-rating star-5">
     <input type="radio" class = "rating_show" id="option5_show" name="star-radios_show" value="5" disabled>
     <label class="label_star" id="option5_label_show" for="option5_show"></label>
@@ -63,7 +62,6 @@ if($result->num_rows==0){
 else{
     $outputString .= ' 
     <div class="form-group" id="review-form">
-    <label id="rating" for="rating">RATING</label>
     <span class="star-rating star-5">
     ';
     for ($count = 5; $count >= 1; $count--) {
@@ -85,6 +83,6 @@ else{
     </span>
     </div>';
 
-$outputString .= ' </ul> <p class="review-note">Total Reviews: ' . $totalRows . '</p> </div> ';
+$outputString .= ' </ul> <h5>Total Reviews: ' . $totalRows . '</h5> </div> ';
 }
 echo $outputString;

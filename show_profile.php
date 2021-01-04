@@ -5,11 +5,11 @@
     <title>FormCSS</title>
     <link rel="stylesheet" href="mystyle.css" />
     <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" type="text/css" href="css/stile.css">
-
+    <link rel="stylesheet" href="css/stile.css">
 </head>
 
 <body>
+<div class="menu">
     <?php
 include 'navbar.php';
 include "../connect.php";

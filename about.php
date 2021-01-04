@@ -14,7 +14,7 @@
   <?php
 include 'navbar.php';
 ?>
-</div>
+
 
  <h1 style="text-align:center">404 site under construction</h1>
 

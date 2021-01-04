@@ -4,10 +4,10 @@
         <title>FormCSS</title>
    <link rel="stylesheet" href="mystyle.css" />
    <link rel="stylesheet" href="css/all.css">
-   <link rel="stylesheet" type="text/css" href="css/stile.css">
-
+   <link rel="stylesheet" href="css/stile.css">
     </head>
     <body>
+    <div class="menu">
     <?php
 include 'navbar.php';
 ?>
@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
 
     $con = new mysqli("127.0.0.1", $dbusername, $dbpass, $database);
 
-    $email = $_POST["email"];
+    $email = $_POST['email'];
     $pwd = $_POST['pass'];
 
     $pwd = trim($pwd);
@@ -41,7 +41,7 @@ if (isset($_POST["submit"])) {
                 $_SESSION["user"] = $row['id'];
                 echo "<div class='myelement'>";
                 echo "<br><a href=\"index.php\">Homepage\t</a>";
-                echo "<a href=\"private.php\">Private Area\t</a>";
+                echo "<a href=\"show_profile.php\">Private Area\t</a>";
                 echo "<a href=\"logout.php\">Logout</a>";
                 echo "</div>";
                 echo "</div>";
@@ -69,7 +69,9 @@ if (isset($_POST["submit"])) {
 
         <input type="submit" name ="submit" value="Submit">
         </div>
-        </form>';
+        
+        </form>
+        </div>';
 
 }
 ?>

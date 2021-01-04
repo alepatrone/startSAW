@@ -11,16 +11,11 @@
     <script src="js/script.js"></script>
 
     <style>
-body {
-    width: 550px;
-    font-family: arial;
-}
 
 ul {
     margin: 0px;
     padding: 10px 0px 0px 0px;
 }
-
 
 .row-title {
     font-size: 20px;
@@ -40,20 +35,12 @@ p.text-address {
     font-size: 12px;
 }
 
-input[type=text] {
-  width: 130px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-repeat: no-repeat;
-  padding: 5x 18px 40px;
-  transition: width 0.4s ease-in-out;
+#review{
+    height:150px; 
+    width:500px;
 }
 
-input[type=text]:focus {
-  width: 100%;
-}
+
 </style>
 
 </head>
@@ -63,7 +50,7 @@ input[type=text]:focus {
   <?php
 include 'navbar.php';
 ?>
-</div>
+
 
 <?php
 include "../connect.php";
@@ -100,34 +87,37 @@ if (isset($_POST["addcart"])) {
 
 $query = "SELECT * FROM products where id='" . $id . "'";
 
+
 if ($result = $con->query($query)) {
-    while ($row = $result->fetch_assoc()) {
-
-        echo '<tr>';
-        echo '<td>' . $row["prodname"] . '</td>';
-        echo "€";
-        echo '<td>' . $row["price"] . '</td>';
-        echo '<td><img src="images/' . $row["imageName"] . '" width="100" height="200""></a></td>';
-        echo '</tr>';
+    echo '<div class = "allProd" style="text-align:center">';
+    while ($row = $result->fetch_assoc()) {  
+      echo '
+        <div class = "product">
+        <a href="show_product.php?id=' . $row["id"] . '"><img src="images/' . $row["imageName"] . '" width="200px" height="200px"></a> <br>
+        ' . $row["prodname"] . '<br>' . $row["price"] . '€</div>';
         echo '<form action = "./show_product.php?id=' . $row["id"] . '" method = "POST">';
-        echo '<input type="submit" name="addcart" value="Add To Cart">';
-    }
-    $result->free();
-}
+        echo '<button class "button" type = "submit" id = "addcart"  name="addcart">Add to Cart <i class="fas fa-shopping-cart"></i></button>';
 
-echo '<h2>Reviews</h2>';
+       
+    }
+  $result->free();
+  echo '</div>';
+  }
 
 $url = "'getRatingData.php?id=" . $id . "'";
 $html = '<body onload="showReviewsData(' . $url . ')">';
 echo $html;
-echo "<h4> GLOBAL REVIEWS</h4>";
-echo '
-<div class="container">
-<span id="products"></span>
-</div>';
+echo "<h4> GLOBAL REVIEWS </h4>";
+ echo '
+ <div class="container">
+ <span id="products"></span>
+ </div>';
 
 $unique = 100;
 
+echo '<h2>Reviews</h2>';
+
+echo '<div class = "reviewscroll">';
 $query = "SELECT * FROM reviews where id_product=$id";
 if ($result = $con->query($query)) {
     while ($row = $result->fetch_assoc()) {
@@ -135,25 +125,31 @@ if ($result = $con->query($query)) {
         $query2 = "SELECT * FROM users where id ='" . $row["id_user"] . "'";
         $res = $con->query($query2);
         $row2 = $res->fetch_assoc();
-        echo '<td>' . $row2["firstname"] . '</td>';
+        echo '<b>';
+        echo 'user: ';
+        echo $row2["firstname"];
         echo '  ';
-        echo '<td>' . $row2["lastname"] . '</td>';
-        echo '<br>';
-        echo '<td>' . $row["review"] . '</td>';
+        echo  $row2["lastname"];
+        echo '</b><br>';
+        echo  $row["review"];
+        echo '<br><br>';
     }
     $result->free();
 }
 
+echo '</div>';
 $con->close();
 
 $_POST['id'] = $id;
+
+
 
 echo "<h3>Leave a Review</h3>";
 
 echo '
 
 <div class="form-group" id="review-form">
-  <label id="rating" for="rating">RATING</label>
+  
   <span class="star-rating star-5">
   <input type="radio" class = "rating" id="option5" name="star-radios" value="5">
   <label class="label_star" id="option5_label" for="option5"></label>
@@ -167,7 +163,7 @@ echo '
   <label class="label_star" id="option1_label" for="option1"></label>
 </span>
 </div>
- <input type="text" id="review" name="review" placeholder="Leave a review..."><br><br>
+<textarea id="review" name="review" placeholder="Leave a review..."></textarea><br>
   <input type="hidden" id="id" name="id" value="' . $id . '">
   <button  style="margin-top:0" type="submit" id="submit"  value="Leave a review">Leave a review</button>
   </form>
@@ -230,5 +226,3 @@ include 'footer.php';
 
 	}//endFunction
 </script>
-
-

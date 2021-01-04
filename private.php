@@ -9,6 +9,7 @@
 
 <body>
 <div class='centertext'>
+<div class="menu">
 <?php
 
 include 'navbar.php';

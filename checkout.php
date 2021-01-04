@@ -32,6 +32,7 @@ $("#display").click(function() {
 </script>
 
 <body>
+<div class="menu">
     <?php
 include 'navbar.php';
 include "../connect.php";
@@ -54,33 +55,36 @@ $result = $con->query($query);
 
 $total = 0;
 
+echo '<div class="centertext" >';
 if ($result = $con->query($query)) {
+    echo '<div class = "allProd" style="text-align:center">';
     while ($row = $result->fetch_assoc()) {
         $q2 = "SELECT * FROM products WHERE id = '" . $row["id_product"] . "'";
         $res = $con->query($q2);
         $r = $res->fetch_assoc();
-
-        echo '<td><a href="show_product.php?id=' . $r["id"] . '"><img src="images/' . $r["imageName"] . '" width="100" height="200""></a></td>';
-        echo '  ';
+        echo '<div class = "product">';
+        echo '<a href="show_product.php?id=' . $r["id"] . '"><img src="images/' . $r["imageName"] . '" width="100" height="200""></a>';
+        echo '<br>  ';
         echo $r["prodname"] . '  ';
 
-        echo 'Prezzo €' . $r["price"];
+        echo '<br>Prezzo €' . $r["price"];
         $total += $r["price"] * $row["quantity"];
 
-        echo '  Quantity:   ';
+        echo ' <br> Quantity:   ';
         echo $row["quantity"];
-        echo '<br>';
+        echo '</div>';
     }
 
     $result->free();
 
 }
-
-echo "<br>TOTALE: " . $total;
+echo '<div class="centertext" >';
+echo "TOTALE: " . $total;
 
 
 echo '<form action = "./cartempty.php?id=' . $_SESSION["user"] . '" method = "POST">';
-echo '<input type="submit" name="buy" value="BUY">';
+echo '<input type="submit" name="cart" id="addcart" value="BUY">';
+echo '</div>';
 ?>
 
 
