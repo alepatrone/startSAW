@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'navbar.php';
 include "../connect.php";
 $con = new mysqli("127.0.0.1", $dbusername, $dbpass, $database);
 if ($con->connect_errno) {
@@ -7,11 +7,17 @@ if ($con->connect_errno) {
     exit();
 }
 
-if (!empty($_GET)) {
-    $id = $_GET['id'];
+$idcheck = -1;
+if (!empty($_POST)) {
+    $idcheck = $_POST['id'];
 }
 
-if ($_SESSION["user"] === $id) {
+if (!empty($_SESSION["user"])) {
+    $id = $_SESSION["user"];
+}
+
+
+if (!empty($_SESSION["user"])) {
 
     $firstname = $_POST['firstname'];
     $firstname = $con->real_escape_string($firstname);
@@ -20,13 +26,13 @@ if ($_SESSION["user"] === $id) {
     $email = $_POST['email'];
     $email = trim($email);
     $email = $con->real_escape_string($email);
-    if(isset($_POST['bio'])){
+    if (isset($_POST['bio'])) {
         $bio = $_POST['bio'];
-    $bio = $con->real_escape_string($bio);
+        $bio = $con->real_escape_string($bio);
     }
-    if(isset($_POST['citta'])){
+    if (isset($_POST['citta'])) {
         $citta = $_POST['citta'];
-    $citta = $con->real_escape_string($citta);
+        $citta = $con->real_escape_string($citta);
     }
 
     if (empty($_POST['firstname'])) {
@@ -50,9 +56,12 @@ if ($_SESSION["user"] === $id) {
     $res = $con->query($query);
     $con->close();
 
-    header("Location: index.php");
+    header("Location: show_profile.php?id=" . $id . "");
 
 } else {
-    echo "Not logged as this user";
+    echo '<div class="centertext" >';
+    echo 'Not logged as this user';
+    echo '</div>';
+
+    include "footer.php";
 }
-?>

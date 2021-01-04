@@ -148,7 +148,7 @@ function checkemail(url){
         if(status=="success"){
             console.log(data);
             if(data=="ko"){
-                $('#emailerror').html("email already used, try a different one");
+                $('#emailerror').html("Email already in use, try a different one");
             }
             else{
                 $('#emailerror').html("");

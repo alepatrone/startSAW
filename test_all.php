@@ -10,6 +10,7 @@ require 'utils.php';
 /* replace $baseurl with your directory */
 /****************************************/
 $baseurl =  'http://localhost/saw/startSAW';
+//$baseurl =  'https://localhost/~S4633806/public_html';
 
 echo "[+] Testing Registration - Login - Show Profile\n";
 
@@ -55,9 +56,11 @@ echo "Last name: $last_name\n";
 echo "---\n";
 
 echo "[-] Calling update_profile.php\n";
+
 update($email, $first_name, $last_name, $baseurl);
 
 echo "[-] Calling show_profile.php\n";
+
 
 echo check_correct_user($email, $first_name, $last_name, show_logged_user($baseurl))
     ? "[*] Success!\n"

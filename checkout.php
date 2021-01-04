@@ -10,26 +10,7 @@
 </head>
 
 <script type="text/javascript" src="jquery-1.3.2.js"> </script>
-<script type="text/javascript">
 
-
-$(document).ready(function() {
-
-$("#display").click(function() {
-
-  $.ajax({    //create an ajax request to display.php
-    type: "GET",
-    url: "cartempty.php?id=12",
-    dataType: "html",   //expect html to be returned
-    success: function(response){
-        $("#responsecontainer").html(response);
-        //alert(response);
-    }
-
-});
-});
-});
-</script>
 
 <body>
 <div class="menu">
